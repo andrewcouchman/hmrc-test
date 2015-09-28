@@ -9,5 +9,4 @@ class CheckoutSystem() {
       case _ => BigDecimal("0.25") * productList.size
     }
   }
-
 }
