@@ -1,16 +1,21 @@
 package com.hmrctest.checkout
 
 class CheckoutSystem() {
-  val applePrice: BigDecimal = BigDecimal("0.3")
+  val appleCalculator: OnOfferProductCalculator = new OnOfferProductCalculator(2, BigDecimal("0.6"))
+  val orangeCalculator: OnOfferProductCalculator = new OnOfferProductCalculator(3, BigDecimal("0.25"))
 
   def processProducts(productList: Seq[String]): BigDecimal = {
     val (apples, oranges) = productList.partition(_ == "Apple")
 
-    apples.size * applePrice +
-      (apples.size % 2 match {
-        case 0 => 0
-        case _ => applePrice
-      }) +
-      oranges.size * BigDecimal("0.25")
+    appleCalculator.calculateFor(apples.size) +
+      orangeCalculator.calculateFor(oranges.size)
+  }
+}
+
+case class OnOfferProductCalculator(freeProductIncrement: Int, normalPrice: BigDecimal) {
+  def calculateFor(numberOfProducts: Int): BigDecimal = {
+    val discountedProductCost = (numberOfProducts / freeProductIncrement) * (normalPrice * (freeProductIncrement - 1))
+    val standardRateProductCost = (numberOfProducts % freeProductIncrement) * normalPrice
+    discountedProductCost + standardRateProductCost
   }
 }
