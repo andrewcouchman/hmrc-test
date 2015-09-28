@@ -9,7 +9,7 @@ object CheckoutEndToEndTest extends App {
     tenApplesShouldCostThreePounds()
 
     fiveOrangesShouldCostOnePoundTwentyFive()
-    aMixOfThreeOrangesAndFourApplesCostsThreePoundsFifteen()
+    aMixOfThreeOrangesAndFourApplesCostsOnePoundNinetyFive()
   }
 
   def oneAppleShouldCostSixtyPence(): Unit = {
@@ -36,10 +36,10 @@ object CheckoutEndToEndTest extends App {
     assertEquals(totalPrice, BigDecimal(1.25))
   }
 
-  def aMixOfThreeOrangesAndFourApplesCostsThreePoundsFifteen(): Unit = {
+  def aMixOfThreeOrangesAndFourApplesCostsOnePoundNinetyFive(): Unit = {
     val productList = (1 to 3).map(_ => "Orange") ++ (1 to 4).map(_ => "Apple")
     val totalPrice = new CheckoutSystem().processProducts(productList)
-    assertEquals(totalPrice, BigDecimal(3.15))
+    assertEquals(totalPrice, BigDecimal(1.95))
   }
 
   def assertEquals(first: Any, second: Any) = {
