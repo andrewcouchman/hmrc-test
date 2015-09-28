@@ -34,12 +34,13 @@ object CheckoutEndToEndTest extends App {
   def oneOrangeShouldCostTwentyFivePence(): Unit = {
     val productList = (1 to 5).map(_ => "Orange")
     val totalPrice = new CheckoutSystem().processProducts(productList)
-    assertEquals(totalPrice, BigDecimal(1))
+    assertEquals(totalPrice, BigDecimal(.25))
   }
+
   def twoOrangesShouldCostFiftyPence(): Unit = {
     val productList = (1 to 5).map(_ => "Orange")
     val totalPrice = new CheckoutSystem().processProducts(productList)
-    assertEquals(totalPrice, BigDecimal(1))
+    assertEquals(totalPrice, BigDecimal(0.5))
   }
 
   def fiveOrangesShouldCostOnePound(): Unit = {
